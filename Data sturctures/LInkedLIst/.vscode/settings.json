@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.cpp": "cpp",
+        "*.kt": "bat",
+        "*.java": "java",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "type_traits": "cpp"
+    }
+}
