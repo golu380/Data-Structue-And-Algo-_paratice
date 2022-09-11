@@ -14,7 +14,6 @@ void func(int n){
     }
 }
 int main(){
-
 int n;
 cin>>n;
 func1(n);
