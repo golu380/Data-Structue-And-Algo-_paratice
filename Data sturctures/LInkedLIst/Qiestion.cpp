@@ -289,6 +289,53 @@ ListNode* mergeList(ListNode * p, ListNode* q){
 
  return third;
 }
+
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode *current = head, *prev = NULL, *next = NULL, *tempcurr, *tempprev;
+        
+        // reverse k nodes
+        int count = 0;
+        while(current != NULL && count < k) {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+            count++;
+        }
+        
+        // when k > the count of the remaining nodes 
+        // then don't reverse the remaining nodes
+        // but the above loop has already reversed it
+        // so we will reverse that part again to
+        // retain its original order
+        if(k > count) {
+            tempcurr = prev;
+            tempprev = NULL;
+            
+            while(tempcurr != NULL) {
+                next = tempcurr->next;
+                tempcurr->next = tempprev;
+                tempprev = tempcurr;
+                tempcurr = next;
+            }
+            
+            // tempprev is the head here
+            return tempprev;
+        }
+        
+        if(current != NULL) {
+            head->next = reverseKGroup(current, k);
+        }
+        
+        return prev;
+    }
+
+
+// Time complexity: O(N)
+// Space complexity: O(1)
+
+        
+
 int findmergePont(ListNode *h1, ListNode*h2){
     int l1 = 0, l2 = 0, diff = 0;
     ListNode* temp1 = h1, *temp2 = h2;
@@ -341,8 +388,13 @@ addAtTail(seclist,80);
 addAtTail(seclist,89);
 ListNode* ans = mergeList(firstlist,seclist);
 // display(seclist);
-// display(firstlist);
+display(firstlist);
 cout<< findmergePont(firstlist,seclist)<<endl;
 display(ans);
+ListNode* ans1 = reverseKGroup(firstlist,2);
+display(firstlist);
+cout<<"the reversed list is "<<endl;
+display(ans1);
+
     return 0;
 }
